@@ -21,8 +21,9 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
 
         supportActionBar?.hide()
 
+        // events
         binding.buttonSave.setOnClickListener(this)
-        verifyUserName()
+
 
     }
 
@@ -32,20 +33,12 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun verifyUserName() {
-        val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
-        if (name != "") {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
 
-    }
 
     private fun handleSave() {
         val name = binding.editName.text.toString()
         if (name != "") {
             SecurityPreferences(this).storeString(MotivationConstants.KEY.USER_NAME, name)
-            startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
             Toast.makeText(
